@@ -36,6 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   freezed_annotation: ^2.0.3
   flutter_screenutil: ^5.5.3+1
+  provider: ^6.0.3
+  json_serializable: ^6.2.0
+  dio: ^4.0.4 # APIクライアント
 
 dev_dependencies:
   flutter_test:

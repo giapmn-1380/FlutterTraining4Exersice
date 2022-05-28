@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:giapmn_training_4_exercise/views/screens/login/LoginScreen.dart';
+import 'package:giapmn_training_4_exercise/data/remote/app_api_client.dart';
+import 'package:giapmn_training_4_exercise/data/remote/dio_client.dart';
+import 'package:giapmn_training_4_exercise/data/repository/home_repository_impl.dart';
+import 'package:giapmn_training_4_exercise/viewmodels/common/common_provider.dart';
+import 'package:giapmn_training_4_exercise/views/screens/popular/popular_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      errorProvider,
+      dioClientProvider,
+      appApiClientProvider,
+      homeRepositoryProdiver,
+      loadingProvider,
+      popularProvider
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +40,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      home: const PopularPage(),
     );
   }
 }

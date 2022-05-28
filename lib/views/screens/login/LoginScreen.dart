@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginScreen> {
     final customTextStyle = CustomTextStyle();
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Container(
           width: double.infinity,
           height: double.infinity,

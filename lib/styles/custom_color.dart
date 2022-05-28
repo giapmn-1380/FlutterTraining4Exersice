@@ -6,7 +6,12 @@ class CustomColor {
   static Color bgSecondary = HexColor("EC407A");
   static Color bgSuccess = HexColor("46C880");
   static Color bgCreateAccount = HexColor("C2185B");
+  static Color progressFinish = HexColor("00A197");
 
+  //Dialog
+  static Color dialogDivider = HexColor('3D3C3C43');
+  static Color dialogContent = HexColor('505050');
+  static Color dialogPositiveAction = HexColor('CD000C');
 
   // text
   static Color textPrimary = HexColor("3C3C3C");
