@@ -12,8 +12,10 @@ _$_MoivePopular _$$_MoivePopularFromJson(Map<String, dynamic> json) =>
       originalTitle: json['original_title'] as String? ?? "",
       title: json['title'] as String? ?? "",
       backdropPath: json['backdrop_path'] as String? ?? "",
+      posterPath: json['poster_path'] as String? ?? "",
       overview: json['overview'] as String? ?? "",
       releaseDate: json['release_date'] as String? ?? "",
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$$_MoivePopularToJson(_$_MoivePopular instance) =>
@@ -22,6 +24,8 @@ Map<String, dynamic> _$$_MoivePopularToJson(_$_MoivePopular instance) =>
       'original_title': instance.originalTitle,
       'title': instance.title,
       'backdrop_path': instance.backdropPath,
+      'poster_path': instance.posterPath,
       'overview': instance.overview,
       'release_date': instance.releaseDate,
+      'vote_average': instance.voteAverage,
     };

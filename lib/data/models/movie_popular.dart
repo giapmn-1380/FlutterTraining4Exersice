@@ -11,8 +11,10 @@ abstract class MoivePopular implements _$MoivePopular {
     @JsonKey(name: 'original_title') @Default("") String originalTitle,
     @JsonKey(name: 'title') @Default("") String title,
     @JsonKey(name: 'backdrop_path') @Default("") String backdropPath,
+  @JsonKey(name: 'poster_path') @Default("") String posterPath,
     @JsonKey(name: 'overview') @Default("") String overview,
     @JsonKey(name: 'release_date') @Default("") String releaseDate,
+    @JsonKey(name: 'vote_average') @Default(0) double voteAverage,
   }) = _MoivePopular;
 
   factory MoivePopular.fromJson(Map<String, dynamic> json) =>

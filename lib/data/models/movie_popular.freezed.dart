@@ -28,10 +28,14 @@ mixin _$MoivePopular {
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'backdrop_path')
   String get backdropPath => throw _privateConstructorUsedError;
+  @JsonKey(name: 'poster_path')
+  String get posterPath => throw _privateConstructorUsedError;
   @JsonKey(name: 'overview')
   String get overview => throw _privateConstructorUsedError;
   @JsonKey(name: 'release_date')
   String get releaseDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vote_average')
+  double get voteAverage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,8 +53,10 @@ abstract class $MoivePopularCopyWith<$Res> {
       @JsonKey(name: 'original_title') String originalTitle,
       @JsonKey(name: 'title') String title,
       @JsonKey(name: 'backdrop_path') String backdropPath,
+      @JsonKey(name: 'poster_path') String posterPath,
       @JsonKey(name: 'overview') String overview,
-      @JsonKey(name: 'release_date') String releaseDate});
+      @JsonKey(name: 'release_date') String releaseDate,
+      @JsonKey(name: 'vote_average') double voteAverage});
 }
 
 /// @nodoc
@@ -67,8 +73,10 @@ class _$MoivePopularCopyWithImpl<$Res> implements $MoivePopularCopyWith<$Res> {
     Object? originalTitle = freezed,
     Object? title = freezed,
     Object? backdropPath = freezed,
+    Object? posterPath = freezed,
     Object? overview = freezed,
     Object? releaseDate = freezed,
+    Object? voteAverage = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -87,6 +95,10 @@ class _$MoivePopularCopyWithImpl<$Res> implements $MoivePopularCopyWith<$Res> {
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String,
+      posterPath: posterPath == freezed
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String,
       overview: overview == freezed
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
@@ -95,6 +107,10 @@ class _$MoivePopularCopyWithImpl<$Res> implements $MoivePopularCopyWith<$Res> {
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String,
+      voteAverage: voteAverage == freezed
+          ? _value.voteAverage
+          : voteAverage // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -111,8 +127,10 @@ abstract class _$$_MoivePopularCopyWith<$Res>
       @JsonKey(name: 'original_title') String originalTitle,
       @JsonKey(name: 'title') String title,
       @JsonKey(name: 'backdrop_path') String backdropPath,
+      @JsonKey(name: 'poster_path') String posterPath,
       @JsonKey(name: 'overview') String overview,
-      @JsonKey(name: 'release_date') String releaseDate});
+      @JsonKey(name: 'release_date') String releaseDate,
+      @JsonKey(name: 'vote_average') double voteAverage});
 }
 
 /// @nodoc
@@ -132,8 +150,10 @@ class __$$_MoivePopularCopyWithImpl<$Res>
     Object? originalTitle = freezed,
     Object? title = freezed,
     Object? backdropPath = freezed,
+    Object? posterPath = freezed,
     Object? overview = freezed,
     Object? releaseDate = freezed,
+    Object? voteAverage = freezed,
   }) {
     return _then(_$_MoivePopular(
       id: id == freezed
@@ -152,6 +172,10 @@ class __$$_MoivePopularCopyWithImpl<$Res>
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String,
+      posterPath: posterPath == freezed
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String,
       overview: overview == freezed
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
@@ -160,6 +184,10 @@ class __$$_MoivePopularCopyWithImpl<$Res>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String,
+      voteAverage: voteAverage == freezed
+          ? _value.voteAverage
+          : voteAverage // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -172,8 +200,10 @@ class _$_MoivePopular extends _MoivePopular {
       @JsonKey(name: 'original_title') this.originalTitle = "",
       @JsonKey(name: 'title') this.title = "",
       @JsonKey(name: 'backdrop_path') this.backdropPath = "",
+      @JsonKey(name: 'poster_path') this.posterPath = "",
       @JsonKey(name: 'overview') this.overview = "",
-      @JsonKey(name: 'release_date') this.releaseDate = ""})
+      @JsonKey(name: 'release_date') this.releaseDate = "",
+      @JsonKey(name: 'vote_average') this.voteAverage = 0})
       : super._();
 
   factory _$_MoivePopular.fromJson(Map<String, dynamic> json) =>
@@ -192,15 +222,21 @@ class _$_MoivePopular extends _MoivePopular {
   @JsonKey(name: 'backdrop_path')
   final String backdropPath;
   @override
+  @JsonKey(name: 'poster_path')
+  final String posterPath;
+  @override
   @JsonKey(name: 'overview')
   final String overview;
   @override
   @JsonKey(name: 'release_date')
   final String releaseDate;
+  @override
+  @JsonKey(name: 'vote_average')
+  final double voteAverage;
 
   @override
   String toString() {
-    return 'MoivePopular(id: $id, originalTitle: $originalTitle, title: $title, backdropPath: $backdropPath, overview: $overview, releaseDate: $releaseDate)';
+    return 'MoivePopular(id: $id, originalTitle: $originalTitle, title: $title, backdropPath: $backdropPath, posterPath: $posterPath, overview: $overview, releaseDate: $releaseDate, voteAverage: $voteAverage)';
   }
 
   @override
@@ -214,9 +250,13 @@ class _$_MoivePopular extends _MoivePopular {
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.backdropPath, backdropPath) &&
+            const DeepCollectionEquality()
+                .equals(other.posterPath, posterPath) &&
             const DeepCollectionEquality().equals(other.overview, overview) &&
             const DeepCollectionEquality()
-                .equals(other.releaseDate, releaseDate));
+                .equals(other.releaseDate, releaseDate) &&
+            const DeepCollectionEquality()
+                .equals(other.voteAverage, voteAverage));
   }
 
   @JsonKey(ignore: true)
@@ -227,8 +267,10 @@ class _$_MoivePopular extends _MoivePopular {
       const DeepCollectionEquality().hash(originalTitle),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(backdropPath),
+      const DeepCollectionEquality().hash(posterPath),
       const DeepCollectionEquality().hash(overview),
-      const DeepCollectionEquality().hash(releaseDate));
+      const DeepCollectionEquality().hash(releaseDate),
+      const DeepCollectionEquality().hash(voteAverage));
 
   @JsonKey(ignore: true)
   @override
@@ -247,8 +289,10 @@ abstract class _MoivePopular extends MoivePopular {
           @JsonKey(name: 'original_title') final String originalTitle,
           @JsonKey(name: 'title') final String title,
           @JsonKey(name: 'backdrop_path') final String backdropPath,
+          @JsonKey(name: 'poster_path') final String posterPath,
           @JsonKey(name: 'overview') final String overview,
-          @JsonKey(name: 'release_date') final String releaseDate}) =
+          @JsonKey(name: 'release_date') final String releaseDate,
+          @JsonKey(name: 'vote_average') final double voteAverage}) =
       _$_MoivePopular;
   _MoivePopular._() : super._();
 
@@ -268,11 +312,17 @@ abstract class _MoivePopular extends MoivePopular {
   @JsonKey(name: 'backdrop_path')
   String get backdropPath => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'poster_path')
+  String get posterPath => throw _privateConstructorUsedError;
+  @override
   @JsonKey(name: 'overview')
   String get overview => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'release_date')
   String get releaseDate => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'vote_average')
+  double get voteAverage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_MoivePopularCopyWith<_$_MoivePopular> get copyWith =>

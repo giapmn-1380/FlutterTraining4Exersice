@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:giapmn_training_4_exercise/data/remote/app_api_client.dart';
 import 'package:giapmn_training_4_exercise/data/remote/dio_client.dart';
 import 'package:giapmn_training_4_exercise/data/repository/home_repository_impl.dart';
 import 'package:giapmn_training_4_exercise/viewmodels/common/common_provider.dart';
+import 'package:giapmn_training_4_exercise/views/screens/movie_detail/movie_detail_page.dart';
 import 'package:giapmn_training_4_exercise/views/screens/popular/popular_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   runApp(MultiProvider(
     providers: [
       errorProvider,
@@ -27,6 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {MovieDetailPage.routeName: (context) => const MovieDetailPage()},
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -42,5 +47,13 @@ class MyApp extends StatelessWidget {
       ),
       home: const PopularPage(),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

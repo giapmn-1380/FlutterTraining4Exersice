@@ -39,6 +39,7 @@ dependencies:
   provider: ^6.0.3
   json_serializable: ^6.2.0
   dio: ^4.0.4 # APIクライアント
+  percent_indicator: ^4.2.1
 
 dev_dependencies:
   flutter_test:
