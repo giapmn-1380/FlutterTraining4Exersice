@@ -13,7 +13,7 @@ final appApiClientProvider = Provider<AppApiClient>(
 
 abstract class AppApiClient {
   const AppApiClient();
-  Future<Result<MoivePopularResponse>> getPopulars();
+  Future<Result<MoivePopularResponse>> getPopulars(int page);
 }
 
 class _AppApiClientImpl extends AppApiClient {
@@ -23,10 +23,11 @@ class _AppApiClientImpl extends AppApiClient {
   final ErrorHandler errorHandler;
 
   @override
-  Future<Result<MoivePopularResponse>> getPopulars() {
+  Future<Result<MoivePopularResponse>> getPopulars(int page) async {
     return Result.guardFuture(() async {
       final response = await _api.get<Json>("/movie/popular", queryParameters: {
-        "api_key": "7757b7c1ccc4f2a0dd1785abd0543677"
+        "api_key": "7757b7c1ccc4f2a0dd1785abd0543677",
+        "page": page
       });
       return MoivePopularResponse.fromJson(response.data!);
     }, errorHandler);

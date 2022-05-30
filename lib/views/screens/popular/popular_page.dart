@@ -6,10 +6,35 @@ import 'package:giapmn_training_4_exercise/styles/custom_text_style.dart';
 import 'package:giapmn_training_4_exercise/views/screens/movie_detail/movie_detail_page.dart';
 import 'package:giapmn_training_4_exercise/views/screens/popular/popular_view_modal.dart';
 import 'package:giapmn_training_4_exercise/views/widgets/common/error/container_error_handling.dart';
+import 'package:giapmn_training_4_exercise/views/widgets/common/item/item_movie.dart';
 import 'package:provider/provider.dart';
 
-class PopularPage extends StatelessWidget {
+class PopularPage extends StatefulWidget {
   const PopularPage({Key? key}) : super(key: key);
+
+  @override
+  State<PopularPage> createState() => _PopularPageState();
+
+
+}
+
+class _PopularPageState extends State<PopularPage> {
+
+  late ScrollController controller;
+
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController()..addListener(_scrollListener);
+    context.read<PopularViewModal>().getPopularList();
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(_scrollListener);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,75 +50,33 @@ class PopularPage extends StatelessWidget {
       body: ContainerErrorHandling(
         child: Container(
           decoration: const BoxDecoration(color: Colors.white),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: listMovie.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              MovieDetailPage.routeName,
-                              arguments: MovieDetailParams(index),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 10.0),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 16.0),
-                                  child: SizedBox(
-                                    width: 100,
-                                    child: Image.network(
-                                        "https://image.tmdb.org/t/p/w200${listMovie[index].posterPath}"),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(listMovie[index].title,
-                                          style: CustomTextStyle.fontSize20),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      Text(
-                                        listMovie[index].overview,
-                                        maxLines: 5,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      })),
-              ElevatedButton(
-                  onPressed: () {
-                    context.read<PopularViewModal>().getPopularList();
-                  },
-                  child: Text("GET STARTED",
-                      style: TextStyle(
-                          color: CustomColor.bgPrimary, fontSize: 18.0)),
-                  style: ElevatedButton.styleFrom(
-                    elevation: 2,
-                    primary: Colors.white,
-                    minimumSize: const Size(double.infinity, 60.0),
-                    shape: CustomShape.buttonShapeRadius30
-                        .copyWith(side: BorderSide.none),
-                  )),
-            ],
+          child: RefreshIndicator(
+            onRefresh: () async {
+              context.read<PopularViewModal>().resetPage();
+              context.read<PopularViewModal>().getPopularList();
+            },
+            child: ListView.builder(
+                controller: controller,
+                itemCount: listMovie.length,
+                itemBuilder: (context, index) {
+                  return ItemMovie(moviePopular: listMovie[index], onClickItemMovie: () {
+                    Navigator.pushNamed(
+                      context,
+                      MovieDetailPage.routeName,
+                      arguments: MovieDetailParams(index),
+                    );
+                  },);
+                }),
           ),
         ),
       ),
     );
+  }
+
+  void _scrollListener() {
+    if (controller.position.extentAfter < 500) {
+      context.read<PopularViewModal>().nextPage();
+      context.read<PopularViewModal>().getPopularList();
+    }
   }
 }

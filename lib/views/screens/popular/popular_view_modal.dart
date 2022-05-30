@@ -17,14 +17,15 @@ class PopularViewModal extends ChangeNotifier {
   bool get isSuccess => _isSuccess;
 
   List<MoivePopular> list = [];
+  int page = 1;
 
   void getPopularList() async {
     loadingState.toLoading();
     try {
-    final result = (await homeRepository.getPopulars()).dataOrThrow;
-    loadingState.toIdle();
-    list = result.listMoviePopulars;
-    _isSuccess = true;
+      final result = (await homeRepository.getPopulars(page)).dataOrThrow;
+      loadingState.toIdle();
+      list.addAll(result.listMoviePopulars);
+      _isSuccess = true;
     } catch (e) {
       if (e is AppError) {
         errorHandler.setError(e);
@@ -32,5 +33,14 @@ class PopularViewModal extends ChangeNotifier {
       loadingState.toIdle();
     }
     notifyListeners();
+  }
+
+  void nextPage() {
+    page++;
+  }
+
+  void resetPage() {
+    list.clear();
+    page = 1;
   }
 }

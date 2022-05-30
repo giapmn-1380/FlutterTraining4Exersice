@@ -13,8 +13,8 @@ class HomeRepositoryImpl extends HomeRepository {
   HomeRepositoryImpl(this.apiClient);
 
   @override
-  Future<Result<MoivePopularResponse>> getPopulars() async {
-    final result = await apiClient.getPopulars();
+  Future<Result<MoivePopularResponse>> getPopulars(int page) async {
+    final result = await apiClient.getPopulars(page);
     return result;
   }
 }
